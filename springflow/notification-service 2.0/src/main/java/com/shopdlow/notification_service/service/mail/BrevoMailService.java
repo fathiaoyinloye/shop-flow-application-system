@@ -1,6 +1,6 @@
 package com.shopdlow.notification_service.service.mail;
 
-import com.shopdlow.notification_service.Exceptions.EmailNotificationServiceFailedException;
+import com.shopdlow.notification_service.exceptions.EmailNotificationServiceFailedException;
 import com.shopdlow.notification_service.dtos.requests.SendMailRequest;
 import com.shopdlow.notification_service.dtos.requests.brevo.EmailRequest;
 import com.shopdlow.notification_service.dtos.requests.brevo.Recipient;
@@ -8,14 +8,15 @@ import com.shopdlow.notification_service.dtos.requests.brevo.Sender;
 import com.shopdlow.notification_service.dtos.responses.SendMailResponse;
 import com.shopdlow.notification_service.dtos.responses.brevo.EmailResponse;
 import org.springframework.http.*;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
+@Service
 
-public class BrevoMailService implements MailService{
-    @Override
+public class BrevoMailService implements MailService{// i have a problem two i cant autowire two serviceimpl
     public SendMailResponse send(SendMailRequest sendMailRequest) {
 
         EmailRequest emailRequest = buildMailRequestFrom(sendMailRequest);

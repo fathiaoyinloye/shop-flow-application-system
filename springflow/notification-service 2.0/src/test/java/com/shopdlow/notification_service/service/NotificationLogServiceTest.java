@@ -6,13 +6,14 @@ import com.shopdlow.notification_service.service.implementation.NotificationServ
 import com.shopdlow.notification_service.service.interfaces.NotificationService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.shopdlow.notification_service.model.Channel.EMAIL;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class NotificationLogServiceTest {
 
-    private final NotificationService notificationService = new NotificationServiceImpl();
+    private  NotificationService notificationService;
     @Test
     @DisplayName(
             """
@@ -22,7 +23,7 @@ public class NotificationLogServiceTest {
             When:
             - I send message
             Assert:
-            - I have recieve response with succes message
+            - I have recieve response with success message
             - That status of the response is success
             """)
     void testCanSendNotification(){

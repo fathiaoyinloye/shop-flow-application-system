@@ -1,13 +1,8 @@
 package com.shopdlow.notification_service.service.implementation;
 
-import com.shopdlow.notification_service.Exceptions.EmailNotificationServiceFailedException;
-import com.shopdlow.notification_service.Exceptions.NotificationSendingFailException;
+import com.shopdlow.notification_service.exceptions.NotificationSendingFailException;
 import com.shopdlow.notification_service.dtos.requests.SendMailRequest;
-import com.shopdlow.notification_service.dtos.requests.brevo.EmailRequest;
-import com.shopdlow.notification_service.dtos.requests.brevo.Recipient;
-import com.shopdlow.notification_service.dtos.requests.brevo.Sender;
 import com.shopdlow.notification_service.dtos.responses.SendMailResponse;
-import com.shopdlow.notification_service.dtos.responses.brevo.EmailResponse;
 import com.shopdlow.notification_service.dtos.requests.NotificationRequest;
 import com.shopdlow.notification_service.dtos.responses.NotificationResponse;
 import com.shopdlow.notification_service.model.NotificationLog;
@@ -15,24 +10,19 @@ import com.shopdlow.notification_service.repository.NotificationRepositoryLog;
 import com.shopdlow.notification_service.service.interfaces.NotificationService;
 import com.shopdlow.notification_service.service.mail.MailService;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.*;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.stereotype.Service;
 
-import java.net.URI;
-import java.util.List;
-import java.util.UUID;
-
-import static com.shopdlow.notification_service.model.Channel.EMAIL;
-
+@Service
 public class NotificationServiceImpl implements NotificationService {
 
     private final MailService mailService;
     private final NotificationRepositoryLog notificationLogRepository;
-    private static final ModelMapper modelMapper = new ModelMapper();
+    private  final ModelMapper modelMapper;
 
-    public NotificationServiceImpl(MailService mailService, NotificationRepositoryLog notificationLogRepository) {
+    public NotificationServiceImpl(MailService mailService, NotificationRepositoryLog notificationLogRepository, ModelMapper modelMapper) {
         this.mailService = mailService;
         this.notificationLogRepository = notificationLogRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
